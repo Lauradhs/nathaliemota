@@ -1,0 +1,14 @@
+/*
+Theme Name: projet11
+Theme URI: http://projet11.local/
+Author: Laura Dhiers
+Author URI: Laura Dhiers
+Description: Thème pour le projet11 de la formation "Développeur Wordpress" d'OpenClassRooms
+Tags: openclassrooms, projet11, cours
+Text Domain: projet11
+*/
+
+#header {
+  width: 1440px;
+  height: 80px;
+}
