@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -10,8 +10,17 @@
 <body>
 
     <header id="header" role="banner">
-        <div id="nav">
-            <nav id="menu" role="navigation">
-        </div>
+        <nav id="nav" role="navigation">
+            <?php
+            wp_nav_menu(
+                array(
+                    'theme_location' => 'menu-principal',
+                    'menu_id' => 'menu-principal',
+                )
+            );
+            ?>
         </nav>
     </header>
+</body>
+
+</html>

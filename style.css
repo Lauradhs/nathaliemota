@@ -8,7 +8,16 @@ Tags: openclassrooms, projet11, cours
 Text Domain: projet11
 */
 
+html.html {
+  margin-top: 0px !important;
+}
+
+body {
+  margin: 0;
+}
+
 #header {
-  width: 1440px;
+  width: 100%; 
   height: 80px;
 }
+
