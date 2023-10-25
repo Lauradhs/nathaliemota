@@ -11,6 +11,8 @@
 
     <header id="header" role="banner">
         <nav id="nav" role="navigation">
+            <img class="logo" src="http://projet11.local/wp-content/uploads/2023/10/Logo-1.png"
+                alt="Logo où il est écrit le nom de Nathalie Mota">
             <?php
             wp_nav_menu(
                 array(
@@ -21,6 +23,3 @@
             ?>
         </nav>
     </header>
-</body>
-
-</html>

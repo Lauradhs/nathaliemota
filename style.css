@@ -8,16 +8,106 @@ Tags: openclassrooms, projet11, cours
 Text Domain: projet11
 */
 
-html.html {
-  margin-top: 0px !important;
-}
-
 body {
   margin: 0;
 }
 
-#header {
-  width: 100%; 
-  height: 80px;
+.logo {
+  width: 216px;
+  height: 14px;
+  margin-left: 146px;
+}
+
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 100px;
+}
+
+#nav a,
+#footer a {
+  text-decoration: none;
+  color: black;
+  font-family: "Space Mono";
+  text-transform: uppercase;
+  padding: 20px;
+}
+
+li {
+  list-style-type: none;
+  display: inline;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-contact {
+  font-family: "Poppins";
+  text-transform: uppercase;
+}
+
+input,
+textarea {
+  border-radius: 8px;
+  border: solid 1px;
+  border-color: #b8bbc2;
+}
+
+input {
+  height: 40px;
+}
+
+textarea {
+  height: 210px;
+  padding: 0px;
+  resize: none;
+}
+
+.form-contact,
+textarea,
+input {
+  width: 263px;
+}
+
+.send {
+  font-family: "Space Mono";
+  width: 263px;
+  height: 50px;
+  border-radius: 2px;
+  padding: 0px;
+  border: transparent;
+  background-color:#D8D8D8;
+}
+
+#modal {
+  width: 597px;
+  height: 769px;
+  border: solid 5px;
+  margin: auto;
+  overflow: hidden;
+  display: none;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Pour occuper toute la hauteur de la modal */
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal-img {
+  height: 106px;
 }
 

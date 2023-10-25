@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Space Mono';
+    src: url(fonts/SpaceMono-Regular.ttf);
+    font-style:normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url(fonts/Poppins-Regular.ttf);
+    font-style:normal;
+    font-weight: 500;
+}
