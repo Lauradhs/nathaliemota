@@ -24,6 +24,7 @@ function enregistrer_mon_menu() {
 }
 add_action('after_setup_theme', 'enregistrer_mon_menu');
 
+add_image_size('custom-thumbnail', 564, 495, true);
 
 
 ?>
