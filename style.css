@@ -92,8 +92,8 @@ input {
   display: none;
   z-index: 9999;
   position: absolute;
-  top:20%;
-  left:30%;
+  top: 20%;
+  left: 30%;
   background-color: white;
 }
 
@@ -124,7 +124,7 @@ form {
 .content-area {
   font-family: "Space Mono";
   text-transform: uppercase;
-  margin: 100px 200px 0px 200px;
+  margin: 5vw 12vw 0vw 12vw;
 }
 
 .post-formats,
@@ -140,13 +140,10 @@ form {
   font-style: italic;
 }
 
-
-
 /* CSS pour la mise en page à deux colonnes */
 .post-wrapper {
   display: flex;
-  align-items: flex-end; 
-
+  align-items: flex-end;
 }
 
 .post-info {
@@ -161,7 +158,6 @@ form {
   flex-direction: column;
 }
 
-
 .custom-thumbnail {
   max-width: 100%;
   height: auto;
@@ -172,14 +168,14 @@ form {
   height: auto;
 }
 
-.post-interest  {
-  font-family: 'Poppins';
+.post-interest {
+  font-family: "Poppins";
   font-size: 14px;
 }
 
 .btn-contact,
 .btn-photos {
-  font-family: 'Space Mono';
+  font-family: "Space Mono";
   font-size: 12px;
   width: 272px;
   height: 50px;
@@ -192,17 +188,15 @@ form {
   justify-content: space-between;
   align-items: center;
   height: 118px;
-  margin: 0px 200px 0px 200px;
+  margin: 0vw 12vw 0vw 12vw;
   border-bottom: 1px solid black;
   padding-bottom: 15px;
 }
 
 .post-interest {
   float: left;
-  margin-right: 80px;
-  
+  margin-right: 5vw;
 }
-
 
 .arrow-left,
 .arrow-right {
@@ -213,11 +207,9 @@ form {
 
 .prev-nav,
 .next-nav {
-    display: inline-block;
+  display: inline-block;
   padding: 0px 10px 0px 10px;
 }
-
-
 
 .thumbnail-link {
   display: flex;
@@ -227,8 +219,8 @@ form {
 .post-contact {
   border-top: 1px solid black;
   height: 118px;
-  margin-top:50px;
-  padding-top: 50px;
+  margin-top: 3vw;
+  padding-top: 3vw;
 }
 
 .next-thumbnail {
@@ -238,15 +230,15 @@ form {
 }
 
 .same-content-title {
-  font-family: 'Space Mono';
+  font-family: "Space Mono";
   font-size: 18px;
   text-transform: uppercase;
-  padding: 50px 0px 50px 0px;
+  padding: 4vw 0vw 4vw 0vw;
 }
 
 .same-content {
   padding-top: 50px;
-  margin: 0px 200px 0px 200px;
+  margin: 0vw 12vw 0vw 12vw;
 }
 
 .photo-container {
@@ -257,7 +249,6 @@ form {
 }
 
 .photo-interest {
-
   overflow: hidden;
   display: inline-block;
   margin-right: 10px; /* Espacement entre les photos, ajustez selon vos besoins */
@@ -274,4 +265,99 @@ form {
   padding: 50px 0px 50px 0px;
   display: flex;
   justify-content: center;
+}
+
+.upsellphoto {
+  object-fit: cover;
+  width: 564px;
+  height: 495px;
+}
+
+.block-container {
+  align-items: center;
+  justify-content: center;
+  width: 564px;
+  height: 495px;
+  display: inline-block;
+}
+
+
+@media (max-width: 850px) {
+  .post-wrapper {
+    flex-direction: column; /* Changer la direction en colonne pour une seule colonne */
+    align-items: flex-start; /* Centrer les éléments */
+  }
+
+  .column-left {
+    order: 2; /* Changer l'ordre pour afficher la colonne gauche après la colonne droite */
+  }
+
+  .column-right {
+    order: 1; /* Changer l'ordre pour afficher la colonne droite avant la colonne gauche */
+  }
+
+  .custom-thumbnail,
+  .post-thumbnail img {
+    width: 100%; /* Utiliser la largeur maximale pour une seule colonne */
+    height: auto;
+  }
+
+  .column-left,
+  .column-right,
+  .post-info,
+  .post-thumbnail {
+    margin-bottom: 20px; /* Ajouter une marge en bas pour séparer les éléments */
+  }
+
+  .under-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 118px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    margin: 0px;
+    padding-bottom: 40px;
+  }
+  
+
+  .post-contact {
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+
+  .post-interest {
+    float: left;
+    margin-right: 5vw;
+  }
+
+  .next-thumbnail,
+  .prev-nav,
+  .next-nav {
+    display: none;
+  }
+
+  .same-content-title {
+    display: flex;
+    justify-content: center;
+  }
+
+  .same-content {
+    padding: 0px;
+  }
+
+  .photo-interest img {
+    width: 317.66px;
+    height: 278.8px;
+  }
+
+  .photo-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .btn-photos {
+    display: none;
+  }
 }
