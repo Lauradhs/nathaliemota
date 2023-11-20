@@ -20,7 +20,8 @@ wp_reset_postdata();
     <h1 class="hero-title"> Photographe Event</h1>
 </div>
 
-<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="filter">
+<!-- Formulaire Catégorie -->
+<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" class="filter-form" id="filter">
     <?php
     if ($terms = get_terms('categorie', 'orderby=name')) :
         echo '<select name="categoryfilter"><option value="">Catégories</option>';
@@ -29,6 +30,39 @@ wp_reset_postdata();
         endforeach;
         echo '</select>';
     endif;
+    ?>
+    <input type="hidden" name="action" value="customfilter">
+</form>
+
+<!-- Formulaire Format -->
+<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" class="filter-form" id="filterf">
+    <?php
+    if ($terms = get_terms('format', 'orderby=name')) :
+        echo '<select name="formatfilter"><option value="">Formats</option>';
+        foreach ($terms as $term) :
+            echo '<option value="' . $term->term_id . '">' . $term->name . '</option>';
+        endforeach;
+        echo '</select>';
+    endif;
+    ?>
+    <input type="hidden" name="action" value="customfilter">
+</form>
+
+<!-- Formulaire Année -->
+<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" class="filter-form" id="yearfilter">
+    <?php
+    global $wpdb;
+    $years = $wpdb->get_col(
+        $wpdb->prepare(
+            "SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_type = 'photo' AND post_status = 'publish' ORDER BY post_date DESC"
+        )
+    );
+
+    echo '<select name="yearfilter"><option value="">Année</option>';
+    foreach ($years as $year) :
+        echo '<option value="' . $year . '">' . $year . '</option>';
+    endforeach;
+    echo '</select>';
     ?>
     <input type="hidden" name="action" value="customfilter">
 </form>

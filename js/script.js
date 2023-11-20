@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 // Champ Ref automatique
 jQuery(document).ready(function ($) {
   $("#modal").on("click", function () {
@@ -39,48 +38,65 @@ jQuery(document).ready(function ($) {
   });
 });
 
-
-// Filter
 jQuery(document).ready(function ($) {
   let currentPage = 1;
+  let selectedCategory = "";
+  let selectedFormat = "";
+  let selectedYear = "";
 
-  // Ajouter une gestion pour le changement de catégorie
-  $("#filter").change(function () {
-    let selectedCategory = $("#filter select[name='categoryfilter']").val();
-    currentPage = 1; // Réinitialiser la page à 1 lors du changement de catégorie
+  function loadPosts() {
 
-    $.ajax({
-      type: "POST",
-      url: "/wp-admin/admin-ajax.php",
-      dataType: "json", 
-      data: {
-        action: "weichie_ajax_handler",
-        paged: currentPage,
-        category: selectedCategory, // Ajoute la catégorie aux données envoyées
-      },
-      success: function (response) {
-        $(".publication-list").html(response.content); // Remplace le contenu existant avec le nouveau
-      },
-    });
-  });
+      $.ajax({
+          type: "POST",
+          url: "/wp-admin/admin-ajax.php",
+          dataType: "json",
+          data: {
+              action: "weichie_ajax_handler",
+              paged: currentPage,
+              category: selectedCategory,
+              format: selectedFormat,
+              yearfilter: selectedYear,
+          },
+          success: function (response) {
+              // Assurez-vous que le contenu est un élément jQuery
+              let $content = $(response.content);
 
-// Load More 
-  $("#load-more").on("click", function () {
+              // Ajoutez le contenu à votre conteneur
+              if (currentPage === 1) {
+                  // Si c'est la première page, remplacez le contenu existant
+                  $(".publication-list").html($content);
+              } else {
+                  // Sinon, ajoutez le contenu à la fin de la liste existante
+                  $(".publication-list").append($content);
+              }
+
+              // Exemple de gestion de la pagination
+              if (currentPage < response.max_pages) {
+                  $("#load-more").show();
+              } else {
+                  $("#load-more").hide();
+              }
+          },
+      });
+  }
+
+  function loadMoreClickHandler() {
     currentPage++;
+    loadPosts();
+  }
 
-    $.ajax({
-      type: "POST",
-      url: "/wp-admin/admin-ajax.php",
-      dataType: "json",
-      data: {
-        action: "weichie_ajax_handler",
-        paged: currentPage,
-        category: $("#filter select[name='categoryfilter']").val(), // Ajoute la catégorie aux données envoyées
-      },
-      success: function (response) {
-        $(".publication-list").append(response.content);
-      },
-    });
+  $("#load-more").on("click", loadMoreClickHandler);
+
+  // Ajouter une gestion pour le changement de catégorie, de format et d'année
+  $(
+    "#filter select[name='categoryfilter'], #filterf select[name='formatfilter'], #yearfilter select[name='yearfilter']"
+  ).change(function () {
+    selectedCategory = $("#filter select[name='categoryfilter']").val();
+    selectedFormat = $("#filterf select[name='formatfilter']").val();
+    selectedYear = $("#yearfilter select[name='yearfilter']").val();
+
+    currentPage = 1;
+
+    loadPosts();
   });
 });
-
