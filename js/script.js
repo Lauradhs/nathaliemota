@@ -24,23 +24,63 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Load More with Ajax
+
+// Champ Ref automatique
+jQuery(document).ready(function ($) {
+  $("#modal").on("click", function () {
+    // Récupère la valeur du champ "Référence"
+    var referenceValue = $(".post-ref").text();
+
+    // Affiche la valeur dans la modale
+    $("#label-ref").text(referenceValue);
+
+    // Ouverture modale
+    $("#modal").show();
+  });
+});
+
+
+// Filter
 jQuery(document).ready(function ($) {
   let currentPage = 1;
-  $("#load-more").on("click", function () {
-    currentPage++; // Do currentPage + 1, because we want to load the next page
+
+  // Ajouter une gestion pour le changement de catégorie
+  $("#filter").change(function () {
+    let selectedCategory = $("#filter select[name='categoryfilter']").val();
+    currentPage = 1; // Réinitialiser la page à 1 lors du changement de catégorie
 
     $.ajax({
       type: "POST",
       url: "/wp-admin/admin-ajax.php",
-      dataType: "html",
+      dataType: "json", 
       data: {
-        action: "weichie_load_more",
+        action: "weichie_ajax_handler",
         paged: currentPage,
+        category: selectedCategory, // Ajoute la catégorie aux données envoyées
       },
-      success: function (res) {
-        $(".publication-list").append(res);
+      success: function (response) {
+        $(".publication-list").html(response.content); // Remplace le contenu existant avec le nouveau
+      },
+    });
+  });
+
+// Load More 
+  $("#load-more").on("click", function () {
+    currentPage++;
+
+    $.ajax({
+      type: "POST",
+      url: "/wp-admin/admin-ajax.php",
+      dataType: "json",
+      data: {
+        action: "weichie_ajax_handler",
+        paged: currentPage,
+        category: $("#filter select[name='categoryfilter']").val(), // Ajoute la catégorie aux données envoyées
+      },
+      success: function (response) {
+        $(".publication-list").append(response.content);
       },
     });
   });
 });
+

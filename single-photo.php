@@ -51,7 +51,7 @@
                     <!-- Afficher le champ personnalisé "Référence" -->
                     <?php $reference = get_field('référence');
                     if ($reference) {
-                        echo '<div class="post-ref">';
+                        echo '<div class="post-ref" id="ref">';
                         echo '<strong>Référence : </strong> ' . esc_html($reference);
                         echo '</div>';
                     }
