@@ -20,11 +20,13 @@ wp_reset_postdata();
     <h1 class="hero-title"> Photographe Event</h1>
 </div>
 
+<div class="form-filters">
+
 <!-- Formulaire Catégorie -->
 <form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" class="filter-form" id="filter">
     <?php
     if ($terms = get_terms('categorie', 'orderby=name')) :
-        echo '<select name="categoryfilter"><option value="">Catégories</option>';
+        echo '<select name="categoryfilter" class="categorie"><option value="">Catégories</option>';
         foreach ($terms as $term) :
             echo '<option value="' . $term->term_id . '">' . $term->name . '</option>';
         endforeach;
@@ -38,7 +40,7 @@ wp_reset_postdata();
 <form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" class="filter-form" id="filterf">
     <?php
     if ($terms = get_terms('format', 'orderby=name')) :
-        echo '<select name="formatfilter"><option value="">Formats</option>';
+        echo '<select name="formatfilter" class="format"><option value="">Formats</option>';
         foreach ($terms as $term) :
             echo '<option value="' . $term->term_id . '">' . $term->name . '</option>';
         endforeach;
@@ -58,7 +60,7 @@ wp_reset_postdata();
         )
     );
 
-    echo '<select name="yearfilter"><option value="">Année</option>';
+    echo '<select name="yearfilter" class="annee"><option value="">Année</option>';
     foreach ($years as $year) :
         echo '<option value="' . $year . '">' . $year . '</option>';
     endforeach;
@@ -66,7 +68,7 @@ wp_reset_postdata();
     ?>
     <input type="hidden" name="action" value="customfilter">
 </form>
-
+</div>
 
 
 

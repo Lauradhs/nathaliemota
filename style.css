@@ -313,57 +313,6 @@ form {
 }
 
 
-.block-container {
-  text-align: center;
-}
-
-.publication-list {
-  list-style: none;
-  padding: 0;
-  display: inline-block;
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-.photo_block {
-  padding: 5px;
-}
-
-.hero-header {
-  background-size: cover;
-  background-position: center;
-  height: 962px; 
-  color: #fff; /* Couleur du texte, à ajuster en fonction de l'image */
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-title {
-  font-family: 'Space Mono';
-  font-size: 96px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  -webkit-text-stroke: 1px white;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
-}
-
-#load-more.no-more-posts {
-  display: none;
-}
-
-.is-loading {
-  opacity: 0.5;
-}
-
-
-
 @media (max-width: 850px) {
   .post-wrapper {
     flex-direction: column; /* Changer la direction en colonne pour une seule colonne */
@@ -441,5 +390,104 @@ form {
 
   .btn-photos {
     display: none;
+  }
+}
+
+
+/* Page d'accueil */ 
+
+.block-container {
+  text-align: center;
+}
+
+.publication-list {
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.photo_block {
+  padding: 5px;
+}
+
+.hero-header {
+  background-size: cover;
+  background-position: center;
+  height: 962px; 
+  color: #fff; /* Couleur du texte, à ajuster en fonction de l'image */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title {
+  font-family: 'Space Mono';
+  font-size: 96px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-text-stroke: 1px white;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+#load-more.no-more-posts {
+  display: none;
+}
+
+.is-loading {
+  opacity: 0.5;
+}
+
+.format,
+.categorie,
+.annee {
+  font-family: 'Poppins';
+  text-transform: uppercase;
+  width: 260px;
+  height: 42px;
+  border: solid 1.3px #B8BBC2;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.form-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0px 25px 0px;
+}
+
+#filterf {
+  margin-right: 300px;
+}
+
+#filter {
+  margin-right: 50px;
+}
+
+@media (max-width: 850px) {
+  .row {
+   flex-direction: column;
+  }
+
+  #filterf,
+  #filter {
+    margin-right: 0px;
+  }
+
+  .form-filters {
+    flex-direction: column;
+    padding: 25px 0px 25px 0px;
+  }
+
+  .hero-header {
+    width: auto;
   }
 }

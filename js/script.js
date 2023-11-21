@@ -43,9 +43,10 @@ jQuery(document).ready(function ($) {
   let selectedCategory = "";
   let selectedFormat = "";
   let selectedYear = "";
+  let isLoading = false; // Ajout de cette variable
 
   function loadPosts() {
-
+      isLoading = true; // Définit la variable à true au début de la requête
       $.ajax({
           type: "POST",
           url: "/wp-admin/admin-ajax.php",
@@ -58,7 +59,6 @@ jQuery(document).ready(function ($) {
               yearfilter: selectedYear,
           },
           success: function (response) {
-              // Assurez-vous que le contenu est un élément jQuery
               let $content = $(response.content);
 
               // Ajoutez le contenu à votre conteneur
@@ -77,26 +77,36 @@ jQuery(document).ready(function ($) {
                   $("#load-more").hide();
               }
           },
+          complete: function () {
+              isLoading = false; // Réinitialise la variable à false à la fin de la requête
+          },
       });
   }
 
   function loadMoreClickHandler() {
-    currentPage++;
-    loadPosts();
+      // Ajout de la vérification pour éviter les requêtes multiples
+      if (!isLoading) {
+          currentPage++;
+          loadPosts();
+      }
   }
 
-  $("#load-more").on("click", loadMoreClickHandler);
-
-  // Ajouter une gestion pour le changement de catégorie, de format et d'année
+  // Gestion du changement de filtre
   $(
-    "#filter select[name='categoryfilter'], #filterf select[name='formatfilter'], #yearfilter select[name='yearfilter']"
+      "#filter select[name='categoryfilter'], #filterf select[name='formatfilter'], #yearfilter select[name='yearfilter']"
   ).change(function () {
-    selectedCategory = $("#filter select[name='categoryfilter']").val();
-    selectedFormat = $("#filterf select[name='formatfilter']").val();
-    selectedYear = $("#yearfilter select[name='yearfilter']").val();
+      selectedCategory = $("#filter select[name='categoryfilter']").val();
+      selectedFormat = $("#filterf select[name='formatfilter']").val();
+      selectedYear = $("#yearfilter select[name='yearfilter']").val();
 
-    currentPage = 1;
+      currentPage = 1;
 
-    loadPosts();
+      loadPosts();
   });
+
+  // Gestion du clic sur le bouton "load more"
+  $("#load-more").on("click", loadMoreClickHandler);
 });
+
+
+
