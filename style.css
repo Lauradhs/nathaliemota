@@ -18,6 +18,13 @@ body {
   margin-left: 146px;
 }
 
+#header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
 #nav {
   display: flex;
   align-items: center;
@@ -490,4 +497,84 @@ form {
   .hero-header {
     width: auto;
   }
+
+  .hero-title {
+    font-size: 27.59px;
+  }
+
+  .header-container {
+    margin:  20px 20px 20px 30px;
+  }
+
+  .block-container img {
+    width: 317.66px;
+    height: 278.8px;
+  }
 }
+
+/* Menu Burger */
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.mobile-menu-toggle {
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 850px) {
+  .mobile-menu-toggle {
+      display: block; /* Afficher le bouton sur les écrans plus petits */
+  }
+
+  #nav {
+      display: none; /* Masquer le menu par défaut sur les écrans plus petits */
+      justify-content: center;
+      margin: 0px;
+      background-color: red;
+      }
+
+
+  .mobile-menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 25px;
+    background-color: #333;
+    margin: 5px 0;
+  }
+
+  .logo {
+    width: 138px;
+    height: 9px;
+    margin: 0px;
+  }
+
+  #menu-principal {
+    width: 100%;
+    height: 812px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+  }
+
+  #menu-principal li {
+    padding-bottom: 20px;
+    font-size: 44px;
+    }
+
+  #nav a {
+    color: white;    
+  }
+
+  #header-container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
