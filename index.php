@@ -87,21 +87,20 @@ wp_reset_postdata();
     if ($the_query->have_posts()) : ?>
         <ul class="publication-list">
             <?php
-            $counter = 0; // Initialisation du compteur
-            echo '<div class="row">'; // Ouvre la première ligne
             while ($the_query->have_posts()) : $the_query->the_post();
-                get_template_part('templates_part/photo-block', 'photo');
-                $counter++;
-                // Ferme la ligne après chaque deuxième photo
-                if ($counter % 2 == 0 && $counter < $the_query->post_count) {
-                    echo '</div><div class="row">';
-                }
+                ?>
+                <li>
+                    <?php get_template_part('templates_part/photo-block', 'photo'); ?>
+                </li>
+                <?php
             endwhile;
-            echo '</div>'; // Ferme la dernière ligne
             ?>
         </ul>
     <?php endif; ?>
     <?php wp_reset_postdata(); ?>
+</div>
+
+
 
     <div class="button">
         <a href="#!" id="load-more">
