@@ -76,7 +76,7 @@ jQuery(document).ready(function ($) {
     });
   }
 
-  // Exemple d'ajout de données pour une nouvelle image
+  //Ajout de données pour une nouvelle image
   var newImageElement = $(".new-images");
   addImageData(newImageElement);
 
