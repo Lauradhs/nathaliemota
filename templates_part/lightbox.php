@@ -15,7 +15,7 @@
 
             <div class="contener-photo-lightbox">
                 <!-- Afficher la photo -->
-                <img id="img-lightbox" src="" alt="Image en grand">
+                <img id="img-lightbox" class="photo" src="" alt="Image en grand">
                 <div class="contener-infos-lightbox">
                     <!-- Afficher la référence -->
                     <p><span id="reference-photo"></span></p>

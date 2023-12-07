@@ -8,29 +8,59 @@ jQuery(document).ready(function ($) {
   const referencePhoto = $("#reference-photo");
   var currentIndex = 0;
 
-  // Fonction pour mettre à jour la lightbox avec les données de l'image actuelle
+  // Tableau pour stocker les données des images
+  var imagesData = [];
+  var totalImages = 0; // Nouvelle variable
+
   function updateLightbox(index) {
-    // Vérifie si imagesData est défini et non vide
+    console.log("Update Lightbox - Index:", index);
+    console.log("Update Lightbox - imagesData:", imagesData);
     if (imagesData && imagesData.length > 0) {
-      // Vérifie si currentIndex est un index valide
       if (index >= 0 && index < imagesData.length) {
         var imageData = imagesData[index];
-        imgLightbox.attr("src", imageData.imageUrl);
+        var urlImage = imageData.imageUrl;
+        imgLightbox.attr("src", urlImage);
         referencePhoto.text(imageData.reference);
         lightboxCategories.text(imageData.category);
-      } else {
-        console.error("Index out of bounds: ", index);
+        $("#photo-id-lightbox").text(imageData.photoId);
+      } else if (index === -1) {
+        // Gestion spéciale lorsque l'index est -1 (hors limites)
+        var firstImageData = imagesData[0];
+        imgLightbox.attr("src", firstImageData.imageUrl);
+        referencePhoto.text(firstImageData.reference);
+        lightboxCategories.text(firstImageData.category);
+        $("#photo-id-lightbox").text(firstImageData.photoId);
       }
-    } else {
-      console.error("imagesData is undefined or empty.");
     }
   }
 
   // Ajoute les données pour chaque image au tableau, en excluant l'icône fullscreen
-  var imagesData = lightboxTrigger
-    .not(fullscreenIcon)
-    .map(function (index) {
-      var imageUrl, reference, category;
+  lightboxTrigger.not(fullscreenIcon).map(function (index) {
+    var imageUrl, reference, category;
+
+    if ($(this).hasClass("photo-interest")) {
+      imageUrl = $(this).find("img").attr("src");
+    } else {
+      imageUrl = $(this).attr("src");
+    }
+
+    reference = $(this).data("reference");
+    category = $(this).data("category");
+
+    // Ajoute un attribut data-index avec l'index actuel
+    $(this).attr("data-index", index);
+
+    imagesData.push({
+      imageUrl: imageUrl,
+      reference: reference,
+      category: category,
+    });
+  });
+
+  // Fonction pour ajouter les données d'une collection d'images au tableau imagesData
+  function addImageData(imageElements) {
+    imageElements.each(function () {
+      var imageUrl, reference, category, photoId;
 
       if ($(this).hasClass("photo-interest")) {
         imageUrl = $(this).find("img").attr("src");
@@ -40,89 +70,79 @@ jQuery(document).ready(function ($) {
 
       reference = $(this).data("reference");
       category = $(this).data("category");
+      photoId = $(this).data("photo");
 
-      // Ajoute un attribut data-index avec l'index actuel
-      $(this).attr("data-index", index);
+      // Ajoute un identifiant unique à chaque élément
+      var uniqueId = "lightbox_" + totalImages;
 
-      return {
+      // Ajoute la classe dynamic-image aux images dynamiques
+      $(this).addClass("dynamic-image");
+
+      // Ajoute les nouvelles données au tableau imagesData
+      imagesData.push({
+        id: uniqueId,
         imageUrl: imageUrl,
         reference: reference,
         category: category,
-      };
-    })
-    .get();
+        photoId: photoId,
+        index: totalImages, // Utilisez totalImages comme index
+      });
 
-  // Fonction pour ajouter les données d'une nouvelle image au tableau imagesData
-  function addImageData(imageElement) {
-    var imageUrl, reference, category;
-
-    if ($(imageElement).hasClass("photo-interest")) {
-      imageUrl = $(imageElement).find("img").attr("src");
-    } else {
-      imageUrl = $(imageElement).attr("src");
-    }
-
-    reference = $(imageElement).data("reference");
-    category = $(imageElement).data("category");
-
-    // Ajoute un attribut data-index avec l'index actuel
-    $(imageElement).attr("data-index", imagesData.length);
-
-    // Ajoute les nouvelles données au tableau imagesData
-    imagesData.push({
-      imageUrl: imageUrl,
-      reference: reference,
-      category: category,
+      totalImages++; // Incrémente le nombre total d'images
     });
   }
 
-  //Ajout de données pour une nouvelle image
-  var newImageElement = $(".new-images");
-  addImageData(newImageElement);
+  // Exemple d'ajout de données pour une nouvelle image
+  var newImageElements = $(".new-images .lightbox-trigger");
+  addImageData(newImageElements);
 
   // Appel de la fonction pour mettre à jour la lightbox après l'ajout d'une nouvelle image
   updateLightbox(imagesData.length - 1);
 
-  $(document).ready(function () {
-    $(document).on("click", ".lightbox-trigger", function (event) {
-      // Récupère l'index de l'élément cliqué
-      currentIndex = lightboxTrigger.index(this);
+  // Utilisez un élément parent statique pour déléguer l'événement click
+  $(document).on("click", ".photo-item .dynamic-image", function (event) {
+    // Récupère l'index à partir de l'attribut data-index
+    var dataIndex = $(this).data("index");
+    console.log("Dynamic Image Click - dataIndex:", dataIndex);
 
-      // Si l'index n'est pas trouvé (élément ajouté dynamiquement), essayez une approche alternative
-      if (currentIndex === -1) {
-        currentIndex = lightboxTrigger.index($(this));
-      }
-
-      // Ajout de logs pour déboguer
-      console.log("Clicked element:", this);
-      console.log("Current index:", currentIndex);
-
-      // Met à jour la lightbox avec les données de l'image actuelle
-      updateLightbox(currentIndex);
-
-      // Affiche la lightbox
-      lightboxModal.addClass("visible");
-    });
-
-    // Utilisez également la délégation d'événements pour gérer les clics sur ".icon-fullscreen"
-    $(document).on("click", ".icon-fullscreen", function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      // Récupère l'index de l'élément cliqué
-      currentIndex = lightboxTrigger.index(
-        $(this).closest(".photo-item").find(".lightbox-trigger")
-      );
+    // Vérifie que l'index est défini et dans les limites du tableau
+    if (
+      dataIndex !== undefined &&
+      dataIndex >= 0 &&
+      dataIndex < imagesData.length
+    ) {
+      // Utilisez l'index stocké dans l'attribut data-index
+      var currentIndex = dataIndex;
 
       // Met à jour la lightbox avec les données de l'image actuelle
       updateLightbox(currentIndex);
 
       // Affiche la lightbox
       lightboxModal.addClass("visible");
-    });
+    }
   });
 
-  // Écouteur d'événements pour fermer la lightbox
+  // Utilisez également la délégation d'événements pour gérer les clics sur ".icon-fullscreen"
+  $(document).on("click", ".icon-fullscreen", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Trouve l'élément .photo-item parent
+    var photoItem = $(this).closest(".photo-item");
+
+    // Trouve l'élément .lightbox-trigger à l'intérieur de .photo-item
+    var lightboxTrigger = photoItem.find(".lightbox-trigger");
+
+    // Récupère l'index de l'élément .lightbox-trigger dans l'ensemble des .lightbox-trigger
+    currentIndex = $(".lightbox-trigger").index(lightboxTrigger);
+
+    // Met à jour la lightbox avec les données de l'image actuelle
+    updateLightbox(currentIndex);
+
+    // Affiche la lightbox
+    lightboxModal.addClass("visible");
+  });
+
   crossIconLightbox.on("click", function () {
     lightboxModal.removeClass("visible");
   });
@@ -131,6 +151,12 @@ jQuery(document).ready(function ($) {
   $("#lightbox-prev-link").on("click", function (event) {
     event.preventDefault();
     currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
+
+    // Ajoutez cette vérification pour éviter un index négatif
+    if (currentIndex < 0) {
+      currentIndex = imagesData.length - 1;
+    }
+
     updateLightbox(currentIndex);
   });
 
@@ -140,11 +166,9 @@ jQuery(document).ready(function ($) {
     currentIndex = (currentIndex + 1) % imagesData.length;
     updateLightbox(currentIndex);
   });
-});
 
-/* Load More */
+  /* Load More */
 
-jQuery(document).ready(function ($) {
   let currentPage = 1;
   let selectedCategory = "";
   let selectedFormat = "";
@@ -182,6 +206,12 @@ jQuery(document).ready(function ($) {
         } else {
           $("#load-more").hide();
         }
+        // Ajout de données pour une nouvelle image
+        var newImageElements = $(".new-images .lightbox-trigger");
+        addImageData(newImageElements);
+
+        // Appel de la fonction pour mettre à jour la lightbox après l'ajout d'une nouvelle image
+        updateLightbox(imagesData.length - 1);
       },
       complete: function () {
         isLoading = false; // Réinitialise la variable à false à la fin de la requête
@@ -201,6 +231,7 @@ jQuery(document).ready(function ($) {
   $("#filter select[name='categoryfilter']").change(function () {
     selectedCategory = $(this).val();
     currentPage = 1;
+    imagesData = [];
     loadPosts();
   });
 
@@ -208,6 +239,7 @@ jQuery(document).ready(function ($) {
   $("#filterf select[name='formatfilter']").change(function () {
     selectedFormat = $(this).val();
     currentPage = 1;
+    imagesData = [];
     loadPosts();
   });
 
@@ -215,6 +247,7 @@ jQuery(document).ready(function ($) {
   $("#yearfilter select[name='yearfilter']").change(function () {
     selectedYear = $(this).val();
     currentPage = 1;
+    imagesData = [];
     loadPosts();
   });
 

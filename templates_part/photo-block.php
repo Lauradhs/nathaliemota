@@ -20,7 +20,7 @@
     <div class="calque-photo">
         <div class="contener-fullscreen">
             <a href="#lightbox">
-                <img class="icon-fullscreen"
+                <img class="icon-fullscreen" data-photo="<?php echo get_the_id(); ?>"
                     src="<?php echo get_template_directory_uri() . '/images/icon_fullscreen.png'; ?>"
                     alt="Icône Fullscreen">
             </a>
