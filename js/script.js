@@ -1,11 +1,12 @@
 jQuery(document).ready(function ($) {
+  /*     Modale de contact     */
+
   const lienContact = $("#menu-item-15");
   const modaleContact = $("#modal");
   const btnContact = $(".btn-contact");
   const lightboxTriggerSelector = ".lightbox-trigger";
 
-  // Variable pour suivre l'état de la modale
-  let modaleOuverte = false;
+  let modaleOuverte = false; // Variable pour suivre l'état de la modale
 
   function toggleModale(event) {
     event.preventDefault();
@@ -19,10 +20,12 @@ jQuery(document).ready(function ($) {
   }
 
   // Écouteur d'événements pour ouvrir/fermer la modale
+
   lienContact.on("click", toggleModale);
   btnContact.on("click", toggleModale);
 
-  // Champ Ref automatique
+  /*     Champ Ref automatique     */
+
   btnContact.on("click", function () {
     // Récupère la valeur du champ "Référence"
     var referenceValue = $(".num-ref").text();
@@ -36,9 +39,7 @@ jQuery(document).ready(function ($) {
   });
 });
 
-
-
-// Menu Burger
+/*      Menu Burger      */
 
 document.addEventListener("DOMContentLoaded", function () {
   var mobileMenuToggle = document.querySelector(".mobile-menu-toggle");

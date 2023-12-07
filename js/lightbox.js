@@ -8,13 +8,14 @@ jQuery(document).ready(function ($) {
   const referencePhoto = $("#reference-photo");
   var currentIndex = 0;
 
-  // Tableau pour stocker les données des images
+  /*     Tableau pour stocker les données des images     */
+
   var imagesData = [];
-  var totalImages = 0; // Nouvelle variable
+  var totalImages = 0;
+
+  /*     Mise à jour contenu Lightbox      */
 
   function updateLightbox(index) {
-    console.log("Update Lightbox - Index:", index);
-    console.log("Update Lightbox - imagesData:", imagesData);
     if (imagesData && imagesData.length > 0) {
       if (index >= 0 && index < imagesData.length) {
         var imageData = imagesData[index];
@@ -34,7 +35,8 @@ jQuery(document).ready(function ($) {
     }
   }
 
-  // Ajoute les données pour chaque image au tableau, en excluant l'icône fullscreen
+  /*     Ajoute les données pour chaque image au tableau, en excluant l'icône fullscreen     */
+
   lightboxTrigger.not(fullscreenIcon).map(function (index) {
     var imageUrl, reference, category;
 
@@ -47,8 +49,7 @@ jQuery(document).ready(function ($) {
     reference = $(this).data("reference");
     category = $(this).data("category");
 
-    // Ajoute un attribut data-index avec l'index actuel
-    $(this).attr("data-index", index);
+    $(this).attr("data-index", index); // Ajoute un attribut data-index avec l'index actuel
 
     imagesData.push({
       imageUrl: imageUrl,
@@ -57,7 +58,8 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  // Fonction pour ajouter les données d'une collection d'images au tableau imagesData
+  /*     Fonction pour ajouter les données d'une collection d'images au tableau imagesData     */
+
   function addImageData(imageElements) {
     imageElements.each(function () {
       var imageUrl, reference, category, photoId;
@@ -72,11 +74,9 @@ jQuery(document).ready(function ($) {
       category = $(this).data("category");
       photoId = $(this).data("photo");
 
-      // Ajoute un identifiant unique à chaque élément
-      var uniqueId = "lightbox_" + totalImages;
+      var uniqueId = "lightbox_" + totalImages; // Ajoute un identifiant unique à chaque élément
 
-      // Ajoute la classe dynamic-image aux images dynamiques
-      $(this).addClass("dynamic-image");
+      $(this).addClass("dynamic-image"); // Ajoute la classe dynamic-image aux images dynamiques
 
       // Ajoute les nouvelles données au tableau imagesData
       imagesData.push({
@@ -92,37 +92,14 @@ jQuery(document).ready(function ($) {
     });
   }
 
-  // Exemple d'ajout de données pour une nouvelle image
+  // Ajout de données pour une nouvelle image
   var newImageElements = $(".new-images .lightbox-trigger");
   addImageData(newImageElements);
 
-  // Appel de la fonction pour mettre à jour la lightbox après l'ajout d'une nouvelle image
-  updateLightbox(imagesData.length - 1);
+  updateLightbox(imagesData.length - 1); // Appel de la fonction pour mettre à jour la lightbox après l'ajout d'une nouvelle image
 
-  // Utilisez un élément parent statique pour déléguer l'événement click
-  $(document).on("click", ".photo-item .dynamic-image", function (event) {
-    // Récupère l'index à partir de l'attribut data-index
-    var dataIndex = $(this).data("index");
-    console.log("Dynamic Image Click - dataIndex:", dataIndex);
+  /*    Utilise la délégation d'événements pour gérer les clics sur ".icon-fullscreen"    */
 
-    // Vérifie que l'index est défini et dans les limites du tableau
-    if (
-      dataIndex !== undefined &&
-      dataIndex >= 0 &&
-      dataIndex < imagesData.length
-    ) {
-      // Utilisez l'index stocké dans l'attribut data-index
-      var currentIndex = dataIndex;
-
-      // Met à jour la lightbox avec les données de l'image actuelle
-      updateLightbox(currentIndex);
-
-      // Affiche la lightbox
-      lightboxModal.addClass("visible");
-    }
-  });
-
-  // Utilisez également la délégation d'événements pour gérer les clics sur ".icon-fullscreen"
   $(document).on("click", ".icon-fullscreen", function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -147,16 +124,11 @@ jQuery(document).ready(function ($) {
     lightboxModal.removeClass("visible");
   });
 
-  // Écouteur d'événements pour la navigation précédente
+  /* Écouteur d'événements pour la navigation précédente */
+
   $("#lightbox-prev-link").on("click", function (event) {
     event.preventDefault();
     currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;
-
-    // Ajoutez cette vérification pour éviter un index négatif
-    if (currentIndex < 0) {
-      currentIndex = imagesData.length - 1;
-    }
-
     updateLightbox(currentIndex);
   });
 
@@ -167,7 +139,7 @@ jQuery(document).ready(function ($) {
     updateLightbox(currentIndex);
   });
 
-  /* Load More */
+  /*      Bouton Charger Plus       */
 
   let currentPage = 1;
   let selectedCategory = "";
@@ -227,6 +199,8 @@ jQuery(document).ready(function ($) {
     }
   }
 
+  /*         Options de filtrage            */
+
   // Gestion du changement de catégorie
   $("#filter select[name='categoryfilter']").change(function () {
     selectedCategory = $(this).val();
@@ -251,6 +225,7 @@ jQuery(document).ready(function ($) {
     loadPosts();
   });
 
-  // Gestion du clic sur le bouton "load more"
+  /*     Gestion du clic sur le bouton "load more"        */
+
   $("#load-more").on("click", loadMoreClickHandler);
 });

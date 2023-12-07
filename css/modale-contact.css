@@ -1,0 +1,108 @@
+/* Formulaire de contact */
+
+.label-contact {
+  font-family: "Poppins";
+  text-transform: uppercase;
+}
+
+input,
+textarea {
+  border-radius: 8px;
+  border: solid 1px;
+  border-color: #b8bbc2;
+}
+
+input {
+  height: 40px;
+}
+
+textarea {
+  height: 210px;
+  padding: 0px;
+  resize: none;
+}
+
+.form-contact,
+textarea,
+input {
+  width: 263px;
+}
+
+.send {
+  font-family: "Space Mono";
+  width: 263px;
+  height: 50px;
+  border-radius: 2px;
+  padding: 0px;
+  border: transparent;
+  background-color: #d8d8d8;
+}
+
+#modal {
+  width: 597px;
+  height: 769px;
+  border: solid 5px black;
+  margin: auto;
+  overflow: hidden;
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  background-color: white;
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.modal-img {
+  height: 106px;
+}
+
+@media (max-width: 850px) {
+  #modal {
+    width: 286px;
+    height: 583px;
+  }
+
+  .modal-img {
+    height: 55px;
+  }
+
+  textarea {
+    height: 149px;
+  }
+
+  .send,
+  input,
+  textarea,
+  .form-contact p {
+    width: 190px;
+  }
+
+  .form-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-contact p {
+    margin: 3px;
+  }
+
+  .modal-img {
+    margin-bottom: 10px;
+  }
+}

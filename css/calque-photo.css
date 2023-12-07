@@ -1,0 +1,74 @@
+
+/* Calque Photo  */
+
+.upsellphoto:hover,
+.photo-interest:hover img,
+.photo-item:hover .calque-photo {
+  opacity: 0.8;
+}
+
+.calque-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 564px;
+  height: 495px;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.calque-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.contener-fullscreen {
+  display: flex;
+  justify-content: end;
+  padding: 20px;
+}
+
+.contener-eye {
+  display: flex;
+  justify-content: center;
+}
+
+.contener-infos {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.icon-fullscreen {
+  width: 50px;
+}
+
+#ref-photo {
+  text-transform: uppercase;
+}
+
+#categorie-photo {
+  font-family: "SpaceMono";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.photo-item {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+@media (max-width: 850px) {
+  .calque-photo {
+    display: none;
+  }
+}

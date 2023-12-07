@@ -2,7 +2,7 @@
 
 <div id="primary" class="content-area">
     <main id="main" class="site-main">
-        <?php while (have_posts()):
+        <?php while(have_posts()):
             the_post(); ?>
             <div class="post-wrapper">
                 <div class="column-left">
@@ -16,11 +16,11 @@
                         <!-- Afficher la taxonomie "Format" -->
                         <?php
                         $formats = get_the_terms(get_the_ID(), 'format');
-                        if ($formats && !is_wp_error($formats)) {
+                        if($formats && !is_wp_error($formats)) {
                             echo '<div class="post-formats">';
                             echo '<strong>Format : </strong>';
-                            foreach ($formats as $format) {
-                                echo '' . esc_html($format->name) . '';
+                            foreach($formats as $format) {
+                                echo ''.esc_html($format->name).'';
                             }
                             echo '</div>';
                         }
@@ -29,11 +29,11 @@
                         <!-- Afficher la taxonomie "Catégorie" -->
                         <?php
                         $categories = get_the_terms(get_the_ID(), 'categorie');
-                        if ($categories && !is_wp_error($categories)) {
+                        if($categories && !is_wp_error($categories)) {
                             echo '<div class="post-categories">';
                             echo '<strong>Catégorie : </strong>';
-                            foreach ($categories as $categorie) {
-                                echo '' . esc_html($categorie->name) . '';
+                            foreach($categories as $categorie) {
+                                echo ''.esc_html($categorie->name).'';
                             }
                             echo '</div>';
                         }
@@ -41,18 +41,18 @@
 
                         <!-- Afficher le champ personnalisé "Type" -->
                         <?php $type = get_field('type');
-                        if ($type) {
+                        if($type) {
                             echo '<div class="post-type">';
-                            echo '<strong>Type : </strong> ' . esc_html($type);
+                            echo '<strong>Type : </strong> '.esc_html($type);
                             echo '</div>';
                         }
                         ?>
 
                         <!-- Afficher le champ personnalisé "Référence" -->
                         <?php $reference = get_field('référence');
-                        if ($reference) {
+                        if($reference) {
                             echo '<div class="post-ref" id="ref">';
-                            echo '<strong>Référence : </strong> <p class="num-ref"> ' . esc_html($reference) . '</p>' ;
+                            echo '<strong>Référence : </strong> <p class="num-ref"> '.esc_html($reference).'</p>';
                             echo '</div>';
                         }
                         ?>
@@ -101,7 +101,7 @@
         <div class="thumbnail-link">
             <?php
             // Flèche du post précédent s'il existe
-            if ($previous_post) {
+            if($previous_post) {
                 ?>
                 <div class="prev-nav">
                     <a href="<?php echo get_permalink($previous_post); ?>" class="arrow-left">
@@ -111,7 +111,7 @@
                 <?php
             }
             // Flèche du post suivant s'il existe
-            if ($next_post) {
+            if($next_post) {
                 ?>
                 <div class="next-nav">
                     <a href="<?php echo get_permalink($next_post); ?>" class="arrow-right">
@@ -149,12 +149,12 @@
 
         $the_query = new WP_Query($args);
 
-        if ($the_query->have_posts()) {
-            while ($the_query->have_posts()):
+        if($the_query->have_posts()) {
+            while($the_query->have_posts()):
                 $the_query->the_post();
-                if (has_post_thumbnail()):
+                if(has_post_thumbnail()):
                     ?>
-                    <?php get_template_part('templates_part/photo-block', 'photo'); 
+                    <?php get_template_part('templates_part/photo-block', 'photo');
                 endif;
             endwhile;
         } else {
