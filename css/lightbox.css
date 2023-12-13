@@ -33,6 +33,7 @@
   display: block;
   display: flex;
   justify-content: center;
+  overflow-y: auto;
   align-items: center;
 }
 
@@ -52,15 +53,15 @@
   position: absolute;
   font-weight: 900;
   font-size: 70px;
-  top: 20px; 
-  right: 10px; 
+  top: 20px;
+  right: 10px;
   z-index: 9999;
   cursor: pointer;
 }
 
 #img-lightbox {
   max-width: 100%;
-  max-height: 90vh; 
+  max-height: 90vh;
   width: auto;
   height: auto;
   padding: 20px;
@@ -94,4 +95,28 @@
 #reference-photo,
 #lightbox-categories {
   text-transform: uppercase;
+}
+
+@media (max-width: 850px) {
+  .arrow-suiv,
+  .arrow-prec {
+    font-size: 30px;
+  }
+
+  .contener-arrow-right p,
+  .contener-arrow-left p {
+    display: none;
+  }
+
+  .contener-infos-lightbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+  }
+
+  .cross-icon-lightbox {
+    font-size: 30px;
+  }
 }

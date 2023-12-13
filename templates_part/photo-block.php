@@ -10,7 +10,7 @@
         echo '<a href="' . esc_url($post_url) . '" class="photo-interest lightbox-trigger"';
         echo ' data-reference="' . esc_attr($reference) . '"';
         echo ' data-category="' . esc_attr(get_the_terms(get_the_ID(), 'categorie')[0]->name) . '">';
-        echo '<img class="upsellphoto lightbox-trigger" src="' . esc_url($image_info[0]) . '" alt="' . esc_attr($alt_text) . '" />';
+        echo '<img class="upsellphoto photo-interest lightbox-trigger" src="' . esc_url($image_info[0]) . '" alt="' . esc_attr($alt_text) . '" />';
         echo '</a>';
     } else {
         echo '<p>Aucune image</p>';

@@ -20,30 +20,22 @@ jQuery(document).ready(function ($) {
       if (index >= 0 && index < imagesData.length) {
         var imageData = imagesData[index];
         var urlImage = imageData.imageUrl;
-        imgLightbox.attr("src", urlImage);
+
+        // Mettre à jour tous les éléments
         referencePhoto.text(imageData.reference);
         lightboxCategories.text(imageData.category);
-        $("#photo-id-lightbox").text(imageData.photoId);
-      } else if (index === -1) {
-        // Gestion spéciale lorsque l'index est -1 (hors limites)
-        var firstImageData = imagesData[0];
-        imgLightbox.attr("src", firstImageData.imageUrl);
-        referencePhoto.text(firstImageData.reference);
-        lightboxCategories.text(firstImageData.category);
-        $("#photo-id-lightbox").text(firstImageData.photoId);
+        imgLightbox.attr("src", urlImage);
       }
     }
   }
 
   /*     Ajoute les données pour chaque image au tableau, en excluant l'icône fullscreen     */
 
-  lightboxTrigger.not(fullscreenIcon).map(function (index) {
+  lightboxTrigger.map(function (index) {
     var imageUrl, reference, category;
 
     if ($(this).hasClass("photo-interest")) {
       imageUrl = $(this).find("img").attr("src");
-    } else {
-      imageUrl = $(this).attr("src");
     }
 
     reference = $(this).data("reference");
@@ -100,32 +92,35 @@ jQuery(document).ready(function ($) {
 
   /*    Utilise la délégation d'événements pour gérer les clics sur ".icon-fullscreen"    */
 
-  $(document).on("click", ".icon-fullscreen", function (event) {
-    event.preventDefault();
-    event.stopPropagation();
+  // Utilise window.matchMedia pour détecter si l'écran est en mode responsive
+  const isResponsive = window.matchMedia("(max-width: 850px)").matches;
 
-    // Trouve l'élément .photo-item parent
-    var photoItem = $(this).closest(".photo-item");
-
-    // Trouve l'élément .lightbox-trigger à l'intérieur de .photo-item
-    var lightboxTrigger = photoItem.find(".lightbox-trigger");
-
-    // Récupère l'index de l'élément .lightbox-trigger dans l'ensemble des .lightbox-trigger
-    currentIndex = $(".lightbox-trigger").index(lightboxTrigger);
-
-    // Met à jour la lightbox avec les données de l'image actuelle
-    updateLightbox(currentIndex);
-
-    // Affiche la lightbox
-    lightboxModal.addClass("visible");
-  });
+  // Écouteur d'événements pour le clic sur ".lightbox-trigger"
+  if (isResponsive) {
+    lightboxTrigger.on("click", function () {
+      currentIndex = $(this).data("index");
+      event.preventDefault(); // Empêche le comportement par défaut du lien
+      updateLightbox(currentIndex);
+      lightboxModal.addClass("visible");
+    });
+  } else {
+    // Écouteur d'événements pour le clic sur ".icon-fullscreen" pour les écrans plus larges
+    $(document).on("click", ".icon-fullscreen", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var photoItem = $(this).closest(".photo-item");
+      var lightboxTrigger = photoItem.find(".lightbox-trigger");
+      currentIndex = $(".lightbox-trigger").index(lightboxTrigger);
+      updateLightbox(currentIndex);
+      lightboxModal.addClass("visible");
+    });
+  }
 
   crossIconLightbox.on("click", function () {
     lightboxModal.removeClass("visible");
   });
 
-  /* Écouteur d'événements pour la navigation précédente */
-
+  // Écouteur d'événements pour la navigation précédente
   $("#lightbox-prev-link").on("click", function (event) {
     event.preventDefault();
     currentIndex = (currentIndex - 1 + imagesData.length) % imagesData.length;

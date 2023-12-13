@@ -5,7 +5,7 @@
         </div>
         <div class="carrousel-img-lightbox">
 
-        
+
             <a href="#lightboxprec" id="lightbox-prev-link">
                 <div class="contener-arrow-left">
                     <span class="arrow-prec">←</span>
@@ -29,12 +29,6 @@
                 </div>
             </a>
         </div>
-
-        <div class="contener-infos-lightbox">
-            <p><span id="reference-photo"></span></p>
-            <p><span id="lightbox-categories"></span></p>
-        </div>
-
 
 
     </div>
