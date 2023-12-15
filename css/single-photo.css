@@ -66,6 +66,13 @@
     border-radius: 2px;
     border: none;
   }
+
+  .btn-contact:hover,
+  .btn-photos:hover,
+  .btn-charger:hover {
+    background-color: black;
+    color: white;
+  }
   
   .under-post {
     display: flex;
