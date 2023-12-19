@@ -165,7 +165,7 @@ $("#lightbox-next-link").on("click", function (event) {
           $(".publication-list").append($content);
         }
 
-        // Exemple de gestion de la pagination
+        // Gestion de la pagination
         if (currentPage < response.max_pages) {
           $("#load-more").show();
         } else {
