@@ -1,5 +1,6 @@
 <div id="modal" class="modal">
     <div class="modal__content">
+    <span class="cross-icon-modale">&times;</span>
         <img class="modal-img" src="http://projet11.local/wp-content/uploads/2023/10/Contact-header.png"
             alt="En-tête de la pop-up où il est écrit Contact">
         <?php

@@ -72,10 +72,28 @@ form {
   height: 106px;
 }
 
+.cross-icon-modale {
+  color: black;
+  margin-left: 550px;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
 @media (max-width: 850px) {
   #modal {
     width: 286px;
     height: 583px;
+    margin-right: 200px;
+    top: 30vw;
+    left: 30vw;
+  }
+
+  .cross-icon-modale {
+    color: black;
+    margin-left: 250px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 30px;
   }
 
   .modal-img {
