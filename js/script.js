@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  // Ajouter un écouteur d'événements pour la classe .cross-icon-modale
+  // Ajoute un écouteur d'événements pour la classe .cross-icon-modale
   crossIconModale.on("click", function () {
     modaleContact.hide(); // Fermer la modale
     modaleOuverte = false; // Mettre à jour l'état de la modale
