@@ -69,6 +69,7 @@
 
 @media (max-width: 850px) {
   .calque-photo {
-    display: none;
-  }
+    width: 317.66px !important;
+     height: 278.8px !important; }
+  
 }

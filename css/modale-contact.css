@@ -125,3 +125,10 @@ form {
     margin-bottom: 10px;
   }
 }
+
+@media (max-width: 510px) {
+  #modal {
+    top: 30vw;
+    left: 15vw;
+  }
+}
