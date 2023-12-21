@@ -52,7 +52,7 @@
                         <?php $reference = get_field('référence');
                         if($reference) {
                             echo '<div class="post-ref" id="ref">';
-                            echo '<strong>Référence : </strong> <p class="num-ref"> '.esc_html($reference).'</p>';
+                            echo '<strong>Référence : </strong> &nbsp; <p class="num-ref"> ' .esc_html($reference). '</p>';
                             echo '</div>';
                         }
                         ?>
@@ -64,6 +64,8 @@
                         </div>
                     </div>
                 </div>
+
+                         <!-- Afficher la photo du post -->
                 <div class="column-right">
                     <div class="post-thumbnail">
                         <?php the_post_thumbnail('large', ['class' => 'custom-thumbnail']); ?>

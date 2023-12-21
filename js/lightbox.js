@@ -1,6 +1,5 @@
 jQuery(document).ready(function ($) {
   const lightboxTrigger = $(".lightbox-trigger");
-  const fullscreenIcon = $(".icon-fullscreen");
   const lightboxModal = $("#lightboxModal");
   const crossIconLightbox = $(".cross-icon-lightbox");
   const imgLightbox = $("#img-lightbox");
@@ -77,7 +76,7 @@ jQuery(document).ready(function ($) {
         reference: reference,
         category: category,
         photoId: photoId,
-        index: totalImages, // Utilisez totalImages comme index
+        index: totalImages, 
       });
 
       totalImages++; // Incrémente le nombre total d'images
@@ -138,10 +137,10 @@ $("#lightbox-next-link").on("click", function (event) {
   let selectedCategory = "";
   let selectedFormat = "";
   let selectedYear = "";
-  let isLoading = false; // Ajout de cette variable
+  let isLoading = false; 
 
   function loadPosts() {
-    isLoading = true; // Définit la variable à true au début de la requête
+    isLoading = true; 
     $.ajax({
       type: "POST",
       url: "/wp-admin/admin-ajax.php",

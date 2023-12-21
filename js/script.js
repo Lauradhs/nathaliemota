@@ -23,7 +23,9 @@ jQuery(document).ready(function ($) {
   lienContact.on("click", toggleModale);
   btnContact.on("click", toggleModale);
 
+
   /* Champ Ref automatique */
+  
   btnContact.on("click", function () {
     // Récupère la valeur du champ "Référence"
     var referenceValue = $(".num-ref").text();

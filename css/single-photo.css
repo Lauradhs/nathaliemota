@@ -18,6 +18,11 @@
   .post-year {
     padding: 10px 10px 10px 0px;
   }
+
+  .post-ref {
+    display: flex;
+    align-items: center;
+  }
   
   .post-title {
     font-size: 66px;
@@ -242,6 +247,14 @@
 
     .post-title {
     font-size: 46px;
+    }
+
+    .post-ref {
+      display: block;
+    }
+
+    .post-year strong {
+      display: block;
     }
   }
   
